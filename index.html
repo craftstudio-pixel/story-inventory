@@ -1337,6 +1337,9 @@ td.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
         </div>
       </div>
 
+      <!-- 規格動態區塊 -->
+      <div id="specDynamic" style="margin-bottom:12px"></div>
+
       <!-- 備註 -->
       <div class="field" id="remarkField" style="margin-bottom:12px">
         <span class="remark-warning-label">⚠ 含備註注意事項</span>
@@ -2539,8 +2542,10 @@ function getChainPartsFromLib(){
 }
 
 function onTypeChange(){
-  const type=document.getElementById('f-品類').value;
+  const type=(document.getElementById('f-品類')||{}).value;
+  if(!type)return;
   const container=document.getElementById('specDynamic');
+  if(!container)return;
   let html=`<div class="spec-dynamic-title">📐 ${type} 規格設定</div>`;
   let cur={};
   if(editProdId){const p=PRODUCTS.find(x=>x.id===editProdId);if(p)cur=p;}
